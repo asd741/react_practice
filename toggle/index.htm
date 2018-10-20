@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>asd's react toggle</title>
+    <style>
+        .title{
+            background: pink;
+        }
+        .title:hover{
+            cursor: pointer;
+        }
+        ol{
+            background: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="../node_modules/babel-standalone/babel.js"></script>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="./src/js/data.js"></script>
+    <script type="text/babel">
+        class List extends React.Component{
+            render(){
+                return(
+                    this.props.list.map((item,index)=>{
+                        return(
+                            <ol key={index}>
+                                <li>{item.name}</li>
+                                <li>{item.age}</li>
+                                <li>{item.introduce}</li>
+                            </ol>
+                        )
+                    })
+                )
+            }
+        }
+        class Content extends React.Component{
+            constructor() {
+                super();
+                console.log(this.handleClick);
+            }
+            handleClick(){
+                console.log(this);
+            }
+            render(){
+                
+                return(
+                    <div>
+                        <div onClick={this.handleClick} className="title">{this.props.name}</div>
+                        <List 
+                            list={this.props.list}
+                        />
+                    </div>
+                )
+            }
+        }
+        class Wrap extends React.Component{
+            getdata(){
+                return dataList;
+            }
+            render(){
+                const data=this.getdata();
+                return(
+                    Object.keys(data).map(
+                        (item,index)=>{
+                            return(
+                                <Content
+                                    key={index}
+                                    {...data[item]}
+                                />
+                            )
+                        }
+                    )
+                )
+            }
+        }
+        ReactDOM.render(
+            <Wrap/>,
+            document.getElementById("app")
+        )
+    </script>
+</body>
+
+</html>
