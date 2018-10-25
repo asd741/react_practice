@@ -27,6 +27,9 @@
     <script src="./src/js/data.js"></script>
     <script type="text/babel">
         class List extends React.Component{
+            constructor() {
+                super();
+            }
             render(){
                 return(
                     this.props.list.map((item,index)=>{
@@ -42,18 +45,17 @@
             }
         }
         class Content extends React.Component{
-            constructor() {
+            constructor(){
                 super();
-                console.log(this.handleClick);
+                this.handleClick=this.handleClick.bind(this);
             }
             handleClick(){
                 console.log(this);
             }
             render(){
-                
                 return(
                     <div>
-                        <div onClick={this.handleClick} className="title">{this.props.name}</div>
+                        <div id="x" onClick={this.handleClick} className="title">{this.props.name}</div>
                         <List 
                             list={this.props.list}
                         />
