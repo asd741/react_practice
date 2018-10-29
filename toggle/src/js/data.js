@@ -39,7 +39,7 @@ const dataList={
             }
         ]
     },
-    "unknow":{
+    "else":{
         "name":"秀吉性別",
         "list":[
             {

@@ -9,6 +9,10 @@
     <style>
         .title{
             background: pink;
+            height: 40px;
+            line-height: 40px;
+            text-indent: 10px;
+            margin: 10px 0px;
         }
         .title:hover{
             cursor: pointer;
@@ -45,25 +49,36 @@
             }
         }
         class Content extends React.Component{
-            constructor(){
-                super();
+            constructor(props){                
+                super(props);
+                console.log(this);
+                
                 this.handleClick=this.handleClick.bind(this);
+                this.state={
+                    showList:this.props.showList
+                }
             }
             handleClick(){
-                console.log(this);
+                this.setState({
+                    showList:!this.state.showList
+                })
             }
             render(){
                 return(
                     <div>
-                        <div id="x" onClick={this.handleClick} className="title">{this.props.name}</div>
-                        <List 
-                            list={this.props.list}
-                        />
+                        <div onClick={this.handleClick} className="title">{this.props.name}</div>
+                        {this.state.showList?<List list={this.props.list}/>:null}
                     </div>
                 )
             }
         }
         class Wrap extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    showList:[1,0,0]
+                }
+            }
             getdata(){
                 return dataList;
             }
@@ -76,6 +91,7 @@
                                 <Content
                                     key={index}
                                     {...data[item]}
+                                    showList={this.state.showList[index]}
                                 />
                             )
                         }
